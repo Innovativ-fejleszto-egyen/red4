@@ -1,0 +1,257 @@
+/* html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: black;
+}
+
+section div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} */
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* =========================================
+   ÁLTALÁNOS BEÁLLÍTÁSOK ÉS VÁLTOZÓK
+   ========================================= */
+:root {
+    --bg-dark: #0a0510;
+    --title-bar-bg: #aa248d;
+    --title-bar-text: #ffffff;
+    --info-bar-bg: #050505;
+    --info-border: #7cfc00;
+    --info-label: #ffeb3b;
+    --info-value: #8bc34a;
+
+    --btn-bg-top: rgba(85, 20, 40, 0.7);
+    --btn-bg-bottom: rgba(45, 10, 20, 0.9);
+    --btn-border: #a83242;
+    --btn-border-hover: #eb6373;
+    --btn-text: #e0e0e0;
+
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-dark);
+    color: #ffffff;
+    font-family: var(--font-main);
+    /* Ide beállíthatod a háttérképet: 
+     background-image: url('hatter.jpg');
+     background-size: cover; */
+}
+
+/* =========================================
+   FŐ ABLAK ÉS KERETEK
+   ========================================= */
+
+/* A külső ablak színátmenetes kerettel (Lila -> Narancs -> Zöld) */
+.app-window {
+    background-color: rgba(10, 5, 16, 0.85);
+    /* Félig átlátszó sötét háttér */
+    border: 2px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: conic-gradient(from var(--angle), #800080, #ff4500, #00ff00, #800080);
+    animation: rotate-border 4s linear infinite;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes rotate-border {
+    to {
+        --angle: 360deg;
+    }
+}
+
+
+/* Felső lila címsor */
+.title-bar {
+    background-color: var(--title-bar-bg);
+    color: var(--title-bar-text);
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid #1a0033;
+}
+
+.window-controls {
+    color: #ff3333;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 10px;
+}
+
+/* Információs sáv (Processzor, Rendszer) */
+.info-bar {
+    background-color: var(--info-bar-bg);
+    border: 1px solid var(--info-border);
+    margin: 4px 10px;
+    padding: 6px 15px;
+    display: flex;
+    gap: 30px;
+    font-size: 12px;
+}
+
+.info-label {
+    color: var(--info-label);
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.info-value {
+    color: var(--info-value);
+}
+
+/* =========================================
+   GOMBOK (BUTTONS)
+   ========================================= */
+.fox-btn {
+    background: linear-gradient(to bottom, var(--btn-bg-top), var(--btn-bg-bottom));
+    border: 1px solid var(--btn-border);
+    border-radius: 4px;
+    color: var(--btn-text);
+    padding: 12px 20px;
+    width: 220px;
+    text-align: center;
+    font-size: 15px;
+    font-family: var(--font-main);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(168, 50, 66, 0.4), inset 0 0 5px rgba(168, 50, 66, 0.2);
+}
+
+.fox-btn:hover {
+    border-color: var(--btn-border-hover);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(235, 99, 115, 0.6), inset 0 0 10px rgba(235, 99, 115, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Gombok elrendezése a tartalomban */
+.content-area {
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    /* Két oszlopba rendezi a gombokat */
+    position: relative;
+    min-height: 500px;
+}
+
+.button-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* =========================================
+   TIPOGRÁFIA ÉS EFFEKTEK
+   ========================================= */
+
+/* Középső üres/körvonalas szöveg (2HB FoxComm 5.1 Lunava Next) */
+.text-outline {
+    font-size: 28px;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #a0a0a0;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* Világító szöveg effektus (DESKTOP VERSION) */
+.text-glow {
+    font-size: 32px;
+    color: #c9a0ff;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-shadow: 0 0 5px #6a32a8, 0 0 15px #6a32a8, 0 0 30px #8a2be2;
+}
+
+/* Alsó lábléc (Vivenium, Build info) */
+.footer-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    color: #888;
+    font-size: 12px;
+    margin-top: auto;
+}
+
+/* Rolling down effect animation */
+.view-transition {
+    animation: rollDown 5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes rollDown {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+        clip-path: inset(0 0 100% 0);
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.sub-page-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sub-page-container h2 {
+    color: var(--btn-border-hover);
+    text-shadow: 0 0 15px rgba(235, 99, 115, 0.4);
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.sub-page-content {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 40px;
+    border-radius: 4px;
+    border: 1px solid var(--btn-border);
+    max-width: 800px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.mascot {
+    width: 400px;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RED4 1FA</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/1-7fa.css">
+</head>
+
+<body>
+
+    <div class="app-window">
+
+        <div class="title-bar">
+            <span>2HB 7FA Azonosítási authentikációs auth rendszer</span>
+            <div class="window-controls">_ X</div>
+        </div>
+
+        <div class="info-bar">
+            <div>
+                <span class="info-label">Advanced Endencio Anti-Dent enProtect SelfProtect Sistem</span>
+                <span class="info-value">Stage 3FA enspiphered</span>
+            </div>
+        </div>
+
+        <div class="content-area">
+
+            <div style="text-align: center; flex-grow: 1;">
+                <div class="text-outline">2HB RED 4 Toadstool</div>
+                <br>
+                <div>A folytatáshoz írja be az alábbi számot!</div>
+                
+                <div style="margin: 20px auto; width: 220px;">
+                    <canvas id="captcha-canvas" width="220" height="70" style="border: 1px solid #ff0000; background: #000; box-shadow: 0 0 10px rgba(255,0,0,0.3);"></canvas>
+                    <br>
+                    <input type="text" id="captcha-input" placeholder="Ellenőrző kód" 
+                        style="background: #000; border: 1px solid #aa248d; color: #fff; padding: 10px; margin-top: 15px; width: 100%; box-sizing: border-box; text-align: center; outline: none; font-family: 'Courier New', monospace; letter-spacing: 2px;">
+                </div>
+
+                <button class="fox-btn" onclick="continueStep()">Következő lépés</button>
+                <div id="error-msg" style="color: #ff3333; margin-top: 10px; font-size: 14px; height: 20px; font-weight: bold;"></div>
+            </div>
+
+        </div>
+
+        <div class="footer-bar">
+            <span>Sporecap build</span>
+            <span>Build: 67.6.9.CC.K2</span>
+        </div>
+
+    </div>
+
+    <script>
+        let captchaValue = '';
+
+        function generateCaptcha() {
+            const canvas = document.getElementById('captcha-canvas');
+            const ctx = canvas.getContext('2d');
+            captchaValue = Math.floor(100000 + Math.random() * 900000).toString();
+            
+            // Background
+            ctx.fillStyle = '#0a0a0a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Random interference lines
+            for (let i = 0; i < 30; i++) {
+                ctx.strokeStyle = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 0.5)`;
+                ctx.lineWidth = Math.random() * 2;
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.stroke();
+            }
+
+            // Random dots noise
+            for (let i = 0; i < 100; i++) {
+                ctx.fillStyle = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 0.5)`;
+                ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 2, 2);
+            }
+            
+            // Draw distorted digits
+            ctx.textBaseline = 'middle';
+            for (let i = 0; i < captchaValue.length; i++) {
+                const fontSize = 28 + Math.random() * 10;
+                ctx.font = `bold ${fontSize}px "Courier New"`;
+                ctx.fillStyle = `rgb(${Math.random()*155+100}, ${Math.random()*155+100}, ${Math.random()*155+100})`;
+                
+                const x = 20 + i * 32;
+                const y = 35 + (Math.random() - 0.5) * 25;
+                const angle = (Math.random() - 0.5) * 0.9;
+                
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(angle);
+                ctx.fillText(captchaValue[i], 0, 0);
+                ctx.restore();
+            }
+        }
+
+        window.onload = generateCaptcha;
+
+        function continueStep() {
+            const userInput = document.getElementById('captcha-input').value;
+            if (userInput === captchaValue) {
+                const audio = new Audio('../asset/3fa.mp3');
+                audio.play();
+                audio.onended = function() {
+                    window.location.href = '4fa.html';
+                };
+            } else {
+                document.getElementById('error-msg').textContent = 'AZONOSÍTÁS SIKERTELEN!';
+                generateCaptcha();
+                document.getElementById('captcha-input').value = '';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

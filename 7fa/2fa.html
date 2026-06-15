@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RED4 2FA</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/1-7fa.css">
+</head>
+
+<body>
+
+    <div class="app-window">
+
+        <div class="title-bar">
+            <span>2HB 7FA Azonosítási authentikációs auth rendszer</span>
+            <div class="window-controls">_ X</div>
+        </div>
+
+        <div class="info-bar">
+            <div>
+                <span class="info-label">Advanced Endencio Anti-Dent enProtect SelfProtect Sistem</span>
+                <span class="info-value">Stage 2FA enspiphered</span>
+            </div>
+        </div>
+
+        <div class="content-area">
+
+            <div style="text-align: center; flex-grow: 1;">
+                <div class="text-outline">2HB RED 4 Toadstool</div>
+                <br><br><br><br><br><br>
+                <div>A folytatáshoz Nyomja meg egyszerre a H és a B gombot a billenyűzeten, ebben a sorrendben és tartsa
+                    nyomva!</div>
+
+                <div id="load-container"
+                    style="display: none; width: 300px; height: 10px; background: #1a1a1a; margin: 20px auto; border: 1px solid #ff0000; position: relative;">
+                    <div id="load-bar"
+                        style="width: 0%; height: 100%; background: #ff0000; box-shadow: 0 0 10px #ff0000;"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bar">
+            <span>Sporecap build</span>
+            <span>Build: 67.6.9.CC.K2</span>
+        </div>
+
+    </div>
+
+    <script>
+        let hPressed = false;
+        let triggered = false;
+
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            if (key === 'h') {
+                hPressed = true;
+            } else if (key === 'b' && hPressed && !triggered) {
+                triggered = true;
+                document.getElementById('load-container').style.display = 'block';
+                const bar = document.getElementById('load-bar');
+
+                const audio = new Audio('../asset/2fa.mp3');
+                audio.ontimeupdate = () => {
+                    const progress = (audio.currentTime / audio.duration) * 100;
+                    bar.style.width = progress + '%';
+                };
+                audio.play();
+                audio.onended = () => {
+                    window.location.href = '3fa.html';
+                };
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key.toLowerCase() === 'h') hPressed = false;
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RED4 1FA</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/1-7fa.css">
+</head>
+
+<body>
+
+    <div class="app-window">
+
+        <div class="title-bar">
+            <span>2HB 7FA Azonosítási authentikációs auth rendszer</span>
+            <div class="window-controls">_ X</div>
+        </div>
+
+        <div class="info-bar">
+            <div>
+                <span class="info-label">Advanced Endencio Anti-Dent enProtect SelfProtect Sistem</span>
+                <span class="info-value">Stage 5FA enspiphered</span>
+            </div>
+        </div>
+
+        <div class="content-area">
+
+            <!-- <div class="button-column">
+        <button class="fox-btn">Reklámvédelem</button>
+        <button class="fox-btn">Telepítő központ</button>
+        <button class="fox-btn">Téma és felület</button>
+        <button class="fox-btn">Speciális beállítások</button>
+        <button class="fox-btn">Felügyeleti eszközök</button>
+        <button class="fox-btn">FoxComm eszközök</button>
+      </div> -->
+
+            <div style="text-align: center; flex-grow: 1;">
+                <div class="text-outline">2HB RED 4 Toadstool</div>
+                <br><br><br><br><br><br>
+                <img id="handplacement" src="../asset/Gemini_Generated_Image_plye44plye44plye.png">
+                <div>A folytatáshoz tegye az ujjait a kijelölt helyre a képen látható módon! Közben kattintson a
+                    következő lépés gombra!</div>
+                <button class="fox-btn" onclick="continueStep()">Következő lépés</button>
+            </div>
+
+            <!-- <div class="button-column">
+        <button class="fox-btn">Cell Menü</button>
+        <button class="fox-btn">Windows összetevők</button>
+        <button class="fox-btn">Hálózat és VPN</button>
+        <button class="fox-btn">Tartománykezelő</button>
+        <button class="fox-btn">Driverkezelés</button>
+        <button class="fox-btn">Névjegy</button>
+      </div> -->
+
+        </div>
+
+        <div class="footer-bar">
+            <span>Sporecap build</span>
+            <span>Build: 67.6.9.CC.K2</span>
+        </div>
+
+    </div>
+
+    <script>
+        function continueStep() {
+            const audio = new Audio('../asset/1fa.mp3');
+            audio.play();
+            audio.onended = function() {
+                window.location.href = '2fa.html';
+            };
+        }
+    </script>
+
+</body>
+
+</html>
